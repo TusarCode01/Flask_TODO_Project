@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body style="body { overflow: hidden; }">
+
+
+    <h1 class="text-center">Todo App</h1>
+    <!--Heading Portion  -->
+    <form action="/submit" method="POST" class="container mb-3">
+        <div class="mb-3 ">
+            <label for="todo_text" class="form-label fs-3 ">Enter Your Todo</label>
+            <input type="text" name='todo_text' class="form-control" id="todo_text">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <!-- Todo Submti Portion -->
+    {% if todos|length == 0 %}
+    <p class="text-center fs-3"> No Record Found,Create Your First Todo</p>
+    {% else %}
+    <table class="table mx-auto" border="3px solid black">
+        <thead>
+            <tr>
+                <th scope="col">SL no</th>
+                <th scope="col">Your Todo</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for todo in todos %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{ todo.desc}}</td>
+                <td>
+                    <a href="/update/{{todo.sno}}" type="button"
+                        class="btn btn-outline-dark btn-sm mx-1">Update</button>
+                    <a href="/delete/{{todo.sno}}" type="button"
+                        class="btn btn-outline-dark btn-sm mx-1">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+
+
+</body>
+
+</html>
